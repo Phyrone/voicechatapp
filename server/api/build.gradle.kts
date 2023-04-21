@@ -18,8 +18,8 @@ dependencies {
     api(kotlin("reflect"))
 
     //kotlin coroutines
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-Beta")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.0-Beta")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-RC")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.0-RC")
 
     //classindex
     implementation("org.atteo.classindex:classindex:3.13")

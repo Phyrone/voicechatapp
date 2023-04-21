@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="root@91.107.224.190:22" type="ssh/sftp" uuid="91673f4d-1254-4a3b-9b7d-7e77f70498e4">
+        <config>
+          <option name="projectRootOnTarget" value="/root/voicechatapp" />
+          <option name="serverName" value="root@91.107.224.190:22 key" />
+          <option name="useRsync" value="true" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="javaVersionString" value="17.0.6" />
+          </config>
+        </ContributedStateBase>
+      </target>
+      <target name="azul/zulu-openjdk:17" type="docker" uuid="eb24a94b-f7ad-40be-a36a-2c14a5d72983">
+        <config>
+          <option name="targetPlatform">
+            <TargetPlatform />
+          </option>
+          <option name="buildImageConfig">
+            <BuildImageConfig>
+              <option name="contextFolder" value="." />
+              <option name="dockerFile" value="server/Dockerfile" />
+            </BuildImageConfig>
+          </option>
+          <option name="dockerServerName" value="Docker (CI)" />
+          <option name="pullImageConfig">
+            <PullImageConfig>
+              <option name="tagToPull" value="azul/zulu-openjdk:17" />
+            </PullImageConfig>
+          </option>
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="agentFolder">
+              <VolumeState>
+                <option name="targetSpecificBits">
+                  <map>
+                    <entry key="mountAsVolume" value="false" />
+                  </map>
+                </option>
+              </VolumeState>
+            </option>
+            <option name="classpathFolder">
+              <VolumeState>
+                <option name="targetSpecificBits">
+                  <map>
+                    <entry key="mountAsVolume" value="false" />
+                  </map>
+                </option>
+              </VolumeState>
+            </option>
+            <option name="homePath" value="/usr/lib/jvm/zulu17" />
+            <option name="javaVersionString" value="17.0.6" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

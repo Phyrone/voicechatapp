@@ -20,8 +20,8 @@ dependencies {
     implementation(kotlin("reflect"))
 
     //kotlin coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-Beta")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.0-Beta")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-RC")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.0-RC")
 
     //koin
     implementation("io.insert-koin:koin-core:3.4.0")
@@ -35,8 +35,8 @@ dependencies {
     implementation("com.google.flogger:flogger-slf4j-backend:0.7.4")
 
     //picocli
-    implementation("info.picocli:picocli:4.7.2")
-    kapt("info.picocli:picocli-codegen:4.7.2")
+    implementation("info.picocli:picocli:4.7.3")
+    kapt("info.picocli:picocli-codegen:4.7.3")
 
     //jansi
     implementation("org.fusesource.jansi:jansi:2.4.0")
