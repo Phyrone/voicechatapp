@@ -1,4 +1,4 @@
-import de.phyrone.buildscripts.KOTLIN_JVM_TARGET
+import de.phyrone.buildscripts.PROJ_KOTLIN_JVM_TARGET
 import de.phyrone.buildscripts.WRITE_YOURSELF_TASK_GROUP
 import de.phyrone.buildscripts.const.ConstWriteYourself
 import org.jetbrains.dokka.gradle.DokkaTask
@@ -16,7 +16,7 @@ kotlin {
     jvm(){
         compilations.all {
             kotlinOptions {
-                jvmTarget = KOTLIN_JVM_TARGET.toString()
+                jvmTarget = PROJ_KOTLIN_JVM_TARGET.toString()
             }
         }
     }

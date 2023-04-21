@@ -1,4 +1,5 @@
-import de.phyrone.buildscripts.KOTLIN_JVM_TARGET
+import de.phyrone.buildscripts.PROJ_JAVA_VERSION
+import de.phyrone.buildscripts.PROJ_KOTLIN_JVM_TARGET
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
@@ -65,11 +66,7 @@ dependencies {
 
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_11
-java.targetCompatibility = JavaVersion.VERSION_11
-kotlin {
-    jvmToolchain(KOTLIN_JVM_TARGET)
-}
+
 
 spotless {
     kotlin {
@@ -104,4 +101,9 @@ tasks {
     withType<DokkaTaskPartial>() {
         dependsOn("kaptKotlin")
     }
+}
+java.sourceCompatibility = PROJ_JAVA_VERSION
+java.targetCompatibility = PROJ_JAVA_VERSION
+kotlin {
+    jvmToolchain(PROJ_KOTLIN_JVM_TARGET)
 }

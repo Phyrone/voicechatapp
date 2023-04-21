@@ -1,4 +1,5 @@
-import de.phyrone.buildscripts.KOTLIN_JVM_TARGET
+import de.phyrone.buildscripts.PROJ_JAVA_VERSION
+import de.phyrone.buildscripts.PROJ_KOTLIN_JVM_TARGET
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
@@ -13,7 +14,7 @@ plugins {
     id("com.github.johnrengelman.shadow")
 }
 
-repositories{
+repositories {
     maven("https://repo.phyrone.de/repository/maven/")
 }
 dependencies {
@@ -36,13 +37,12 @@ dependencies {
     implementation("com.h2database:h2:2.1.214")
 
 
-
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
 kotlin {
-    jvmToolchain(KOTLIN_JVM_TARGET)
+    jvmToolchain(PROJ_KOTLIN_JVM_TARGET)
 }
 
 spotless {
@@ -94,4 +94,9 @@ tasks {
         }
 
     }
+}
+java.sourceCompatibility = PROJ_JAVA_VERSION
+java.targetCompatibility = PROJ_JAVA_VERSION
+kotlin {
+    jvmToolchain(PROJ_KOTLIN_JVM_TARGET)
 }

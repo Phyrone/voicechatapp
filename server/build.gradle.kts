@@ -1,7 +1,5 @@
-import de.phyrone.buildscripts.KOTLIN_JVM_TARGET
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
-import org.jetbrains.kotlin.gradle.internal.KaptTask
+import de.phyrone.buildscripts.PROJ_JAVA_VERSION
+import de.phyrone.buildscripts.PROJ_KOTLIN_JVM_TARGET
 
 /*
 import de.phyrone.buildscripts.jarFiles
@@ -26,7 +24,8 @@ plugins {
 
 dependencies {
     implementation(project(":server:launcher"))
-    //implementation(project(":server:core"))
+    implementation(project(":server:core"))
+
     /*
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
@@ -118,7 +117,7 @@ tasks {
         }
     }
     compileKotlin {
-        kotlinOptions.jvmTarget = KOTLIN_JVM_TARGET.toString()
+        kotlinOptions.jvmTarget = PROJ_KOTLIN_JVM_TARGET.toString()
     }
 
     /*
@@ -205,10 +204,10 @@ tasks {
 
 
 }
-java.sourceCompatibility = JavaVersion.VERSION_11
-java.targetCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = PROJ_JAVA_VERSION
+java.targetCompatibility = PROJ_JAVA_VERSION
 kotlin {
-    jvmToolchain(KOTLIN_JVM_TARGET)
+    jvmToolchain(PROJ_KOTLIN_JVM_TARGET)
 }
 
 /*
