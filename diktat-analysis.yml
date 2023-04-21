@@ -1,0 +1,4 @@
+# i dont like this rule because it is typical and can help to understand the code
+# it can show alternatives which where considered or used in the past
+- name: COMMENTED_OUT_CODE
+  enabled: false
