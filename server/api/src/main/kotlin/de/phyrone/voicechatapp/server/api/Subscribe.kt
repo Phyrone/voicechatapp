@@ -6,7 +6,8 @@ package de.phyrone.voicechatapp.server.api
  * valid
  *
  * @property priority the priority of the listener (higher = earlier)
- * @property async if the listener should be executed async or more specific if the following listeners do not wait for this listener to finish
+ * @property async if the listener should be executed async or more specific if the following
+ *   listeners do not wait for this listener to finish
  */
 @Target(AnnotationTarget.FUNCTION)
 annotation class Subscribe(
