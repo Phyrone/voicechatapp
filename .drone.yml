@@ -3,6 +3,6 @@ type: docker
 name: default
 steps:
   - name: Gradle Build
-    image: openjdk:17
+    image: azul/zulu-openjdk:17
     commands:
       - ./gradlew build
