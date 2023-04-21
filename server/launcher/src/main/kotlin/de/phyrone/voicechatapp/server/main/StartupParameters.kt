@@ -6,7 +6,6 @@ import de.phyrone.voicechatapp.server.MainLoop
 import java.io.File
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle
-import org.koin.core.KoinApplication
 import picocli.CommandLine.Command
 import picocli.CommandLine.Option
 
@@ -30,7 +29,7 @@ class StartupParameters : Runnable {
 
   override fun run() {
     LOGGER.atInfo()
-        .log("%s", ToStringBuilder.reflectionToString(this, ToStringStyle.NO_CLASS_NAME_STYLE),)
+        .log("%s", ToStringBuilder.reflectionToString(this, ToStringStyle.NO_CLASS_NAME_STYLE))
 
     ServerBootstrap(this).run()
     MainLoop.run()

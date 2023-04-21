@@ -32,64 +32,64 @@ import org.koin.dsl.module
 @AutoloadListener
 class DatabaseManager : KoinComponent {
 
-    private val koinApplication by inject<KoinApplication>()
-    private val dataSource by inject<DataSource>()
-    private val database by inject<Database>()
-    private val autoloader by inject<Autoloader>()
+  private val koinApplication by inject<KoinApplication>()
+  private val dataSource by inject<DataSource>()
+  private val database by inject<Database>()
+  private val autoloader by inject<Autoloader>()
 
-    @Subscribe(async = true)
-    suspend fun ServerBootstrapEvent.onBootstrap() {
-        LOGGER.atInfo().log("Loading Database Module...")
-        val databaseModuleLoad =
-            measureNanoTime {
-                koinApplication.modules(DATABASE_MODULE)
-                newSuspendedTransaction(
-                    Dispatchers.IO,
-                    database,
-                    Connection.TRANSACTION_SERIALIZABLE,
-                ) {
-                    SchemaUtils.createMissingTablesAndColumns(
-                        *autoloader.getAnnotated(AutoloadTable::class, Table::class).toTypedArray(),
-                    )
-                }
+  @Subscribe(async = true)
+  suspend fun ServerBootstrapEvent.onBootstrap() {
+    LOGGER.atInfo().log("Loading Database Module...")
+    val databaseModuleLoad =
+        measureNanoTime {
+              koinApplication.modules(DATABASE_MODULE)
+              newSuspendedTransaction(
+                  Dispatchers.IO,
+                  database,
+                  Connection.TRANSACTION_SERIALIZABLE,
+              ) {
+                SchemaUtils.createMissingTablesAndColumns(
+                    *autoloader.getAnnotated(AutoloadTable::class, Table::class).toTypedArray(),
+                )
+              }
             }
-                .nanoseconds
-        LOGGER.atInfo().log("Database Loaded (%s)", databaseModuleLoad)
-        ObjectWaiter(this)
-    }
+            .nanoseconds
+    LOGGER.atInfo().log("Database Loaded (%s)", databaseModuleLoad)
+    ObjectWaiter(this)
+  }
 
-    @Subscribe
-    fun ServerShutdownEvent.onShutdown() {
-        LOGGER.atInfo().log("Disabling Database Module...")
-        val disableTime = measureNanoTime { (dataSource as? Closeable)?.close() }.nanoseconds
-        LOGGER.atInfo().log("Database Module Disabled (%s)", disableTime)
-    }
+  @Subscribe
+  fun ServerShutdownEvent.onShutdown() {
+    LOGGER.atInfo().log("Disabling Database Module...")
+    val disableTime = measureNanoTime { (dataSource as? Closeable)?.close() }.nanoseconds
+    LOGGER.atInfo().log("Database Module Disabled (%s)", disableTime)
+  }
 
-    companion object {
-        private val LOGGER = logger()
-        private val DATABASE_MODULE =
-            module(true) {
-                single { databaseConfig() }
-                single { Database.connect(get<DataSource>(), databaseConfig = get<DatabaseConfig>()) }
-                single { datasourceConfig() }
-                single { HikariDataSource(get()) } bind DataSource::class
-            }
-
-        private fun databaseConfig(): DatabaseConfig {
-            return DatabaseConfig {
-                this.sqlLogger = CoreSqlLogger
-                this.useNestedTransactions = true
-            }
+  companion object {
+    private val LOGGER = logger()
+    private val DATABASE_MODULE =
+        module(true) {
+          single { databaseConfig() }
+          single { Database.connect(get<DataSource>(), databaseConfig = get<DatabaseConfig>()) }
+          single { datasourceConfig() }
+          single { HikariDataSource(get()) } bind DataSource::class
         }
 
-        private fun datasourceConfig(): HikariConfig {
-            //TODO configurable
-            val config = HikariConfig()
-            config.jdbcUrl = "jdbc:h2:./data/database"
-            config.driverClassName = "org.h2.Driver"
-            config.maximumPoolSize = 15
-            config.minimumIdle = 1
-            return config
-        }
+    private fun databaseConfig(): DatabaseConfig {
+      return DatabaseConfig {
+        this.sqlLogger = CoreSqlLogger
+        this.useNestedTransactions = true
+      }
     }
+
+    private fun datasourceConfig(): HikariConfig {
+      // TODO configurable
+      val config = HikariConfig()
+      config.jdbcUrl = "jdbc:h2:./data/database"
+      config.driverClassName = "org.h2.Driver"
+      config.maximumPoolSize = 15
+      config.minimumIdle = 1
+      return config
+    }
+  }
 }

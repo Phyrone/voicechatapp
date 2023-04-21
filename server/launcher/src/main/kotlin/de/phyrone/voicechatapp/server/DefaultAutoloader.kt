@@ -21,12 +21,12 @@ class DefaultAutoloader(
   private fun <T> List<Any>.typed(clazz: Class<T>): List<T> = filterIsInstance(clazz)
   override suspend fun <T : Any> getAnnotated(
       annotation: Class<out Annotation>,
-      clazz: Class<T>
+      clazz: Class<T>,
   ): List<T> = ClassIndex.getAnnotated(annotation, classloader).instanceAll().typed(clazz)
 
   override suspend fun <T : Any> getAnnotated(
       annotation: KClass<out Annotation>,
-      clazz: KClass<T>
+      clazz: KClass<T>,
   ) = getAnnotated(annotation.java, clazz.java)
 
   override suspend fun getAnnotated(annotation: Class<out Annotation>): List<Any> =

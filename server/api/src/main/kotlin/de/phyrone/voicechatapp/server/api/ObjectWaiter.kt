@@ -25,7 +25,7 @@ object ObjectWaiter {
      * Marks an instance as ready
      *
      * @param instance the instance to mark as ready
-     * @return nothing
+     * @return [Unit] nothing its a procedure
      */
     operator fun invoke(instance: Any) = ready(instance)
 
@@ -33,7 +33,7 @@ object ObjectWaiter {
      * Marks an instance as ready
      *
      * @param instance the instance to mark as ready
-     * @return nothing
+     * @return [Unit] nothing its a procedure
      */
     fun ready(instance: Any) {
         waiterInstances.update { instances -> instances + instance }
