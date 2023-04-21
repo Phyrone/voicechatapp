@@ -20,10 +20,11 @@ kotlin {
             }
         }
     }
+    /*
     js(IR) {
         browser()
         binaries.library()
-    }
+    }*/
     sourceSets {
         @Suppress("UNUSED_VARIABLE")
         val commonMain by getting {
