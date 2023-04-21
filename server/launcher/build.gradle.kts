@@ -29,7 +29,7 @@ dependencies {
 
 
     //logback
-    implementation("ch.qos.logback:logback-classic:1.4.6")
+    implementation("ch.qos.logback:logback-classic:1.4.7")
     //google fluent logger
     implementation("com.google.flogger:flogger:0.7.4")
     implementation("com.google.flogger:flogger-slf4j-backend:0.7.4")
