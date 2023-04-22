@@ -7,7 +7,7 @@ on:
   pull_request: {}
 
 jobs:
-  build:
+  build_server:
     strategy:
       matrix:
         JVM_VERSION:
@@ -16,7 +16,6 @@ jobs:
           - 20
     name: Build Server
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
@@ -41,3 +40,69 @@ jobs:
           name: build-artifacts
           path: | 
             server/build/libs/*.jar
+  build_client:      
+    
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+          working-directory: client
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '19'
+          cache: 'yarn'
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: | 
+            client/dist
+      
+
+  build_client_tauri:
+    strategy:
+      matrix:
+        RUN_ON:
+          - ubuntu-20.04
+          - macos-latest
+          - windows-latest
+    needs:
+      - build_client
+    runs-on: ${{ matrix.RUN_ON }}
+    defaults:
+      run:
+          working-directory: client
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies (ubuntu only)
+        if: matrix.RUN_ON == 'ubuntu-20.04'
+        # You can remove libayatana-appindicator3-dev if you don't use the system tray feature.
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libayatana-appindicator3-dev librsvg2-dev
+
+      # get the build artifacts from the previous job
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifacts
+          path: client/dist
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '19'
+          cache: 'yarn'
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+    # Comming SOON
