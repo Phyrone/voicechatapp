@@ -102,6 +102,9 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: Add Arm64 target
+        if: matrix.platform == 'macos-latest'
+        run: rustup target add aarch64-apple-darwin
       - name: Rust cache
         uses: swatinem/rust-cache@v2
         with:
