@@ -7,3 +7,9 @@ steps:
     image: azul/zulu-openjdk:11
     commands:
       - ./gradlew build --no-daemon
+  - name: Build Client
+    image: node:19
+    commands:
+      - cd client
+      - yarn install
+      - yarn build
