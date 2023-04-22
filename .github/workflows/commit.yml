@@ -36,6 +36,7 @@ jobs:
         run: ./gradlew --stop
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
+        if: matrix.JVM_VERSION == 11
         with:
           name: server
           if-no-files-found: error
