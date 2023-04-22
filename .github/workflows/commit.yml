@@ -179,7 +179,7 @@ jobs:
         run: yarn tauri build --target universal-apple-darwin
       #TODO: linux, windows arm64 support
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: client-${{ matrix.platform }}
           if-no-files-found: error
