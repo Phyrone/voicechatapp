@@ -72,8 +72,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           name: client-gh-pages
-          path: | 
-            client/dist
+          path: dist
       
   pages:
     name: Publish to GitHub Pages
