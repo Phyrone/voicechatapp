@@ -37,11 +37,12 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: build-artifacts
+          name: server
+          if-no-files-found: error
           path: | 
             server/build/libs/*.jar
-  build_client:      
-    
+  build_client_web:
+    name: Build Client Web      
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -62,21 +63,22 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: build-artifacts
+          name: client-web
+          if-no-files-found: error
           path: | 
             client/dist
       
 
   build_client_tauri:
+    needs:
+      - build_client_web
     strategy:
       matrix:
-        RUN_ON:
+        platform:
           - ubuntu-20.04
           - macos-latest
           - windows-latest
-    needs:
-      - build_client
-    runs-on: ${{ matrix.RUN_ON }}
+    runs-on: ${{ matrix.platform }}
     defaults:
       run:
           working-directory: ./client
@@ -84,7 +86,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies (ubuntu only)
-        if: matrix.RUN_ON == 'ubuntu-20.04'
+        if: matrix.platform == 'ubuntu-20.04'
         # You can remove libayatana-appindicator3-dev if you don't use the system tray feature.
         run: |
           sudo apt-get update
@@ -107,4 +109,16 @@ jobs:
         with:
           toolchain: stable
           override: true
-    # Comming SOON
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './client/src-tauri -> target'
+      - name: Install Yarn Dependencies
+        run: yarn install
+      - name: Build 
+        if: matrix.platform != 'macos-latest'
+        run: yarn tauri build
+      - name: Build (macos universal)
+        if: matrix.platform == 'macos-latest'
+        run: yarn tauri build --target universal-apple-darwin
+      #TODO: linux, windows arm64 support

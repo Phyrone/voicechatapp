@@ -13,6 +13,9 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
+	"dependencies": {
+		"@tauri-apps/api": "^1.2.0"
+	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
@@ -31,7 +34,8 @@
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"vite": "^4.2.0",
-		"vitest": "^0.30.0"
+		"vitest": "^0.30.0",
+		"@tauri-apps/cli": "^1.2.3"
 	},
 	"type": "module"
 }
