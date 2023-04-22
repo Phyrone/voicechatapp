@@ -38,7 +38,9 @@ allprojects {
     }
 }
 
+tasks {
 
+}
 /*
 dependencies {
     testImplementation(kotlin("test"))
@@ -54,6 +56,13 @@ kotlin {
 */
 
 tasks {
+    named("dokkaHtmlMultiModule") {
+        dependsOn(
+            ":server:dokkaHtmlMultiModule",
+
+        )
+    }
+
     wrapper {
         this.gradleVersion = "8.1.1"
         this.distributionType = Wrapper.DistributionType.ALL
