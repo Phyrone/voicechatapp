@@ -4,26 +4,27 @@ on:
   push:
     branches-ignore:
       - 'renovate/**'
-    paths-ignore:
-      - 'docs/**'
-      - 'client/**'
-      - 'debug-workdir/**'
   pull_request: {}
-
 
 jobs:
   build:
+    strategy:
+      matrix:
+        JVM_VERSION:
+          - 11
+          - 17
+          - 20
     name: Build Server
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup JDK 17
+      - name: Setup JDK ${{ matrix.JVM_VERSION }}
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: ${{ matrix.JVM_VERSION }}
           cache: 'gradle'
       - uses: gradle/wrapper-validation-action@v1
       - name: Check with Gradle
