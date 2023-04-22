@@ -68,7 +68,7 @@ jobs:
           path: | 
             client/dist
       - name: Upload for GitHub Pages
-        uses: actions/upload-pages-artifact
+        uses: actions/upload-pages-artifact@v1
         if: github.ref == 'refs/heads/main'
         with:
           name: client-gh-pages
