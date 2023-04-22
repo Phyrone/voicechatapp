@@ -4,7 +4,7 @@ name: default
 
 steps:
   - name: Build Server
-    image: azul/zulu-openjdk:11
+    image: azul/zulu-openjdk:20
     commands:
       - ./gradlew build --no-daemon
   - name: Build Client
