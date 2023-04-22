@@ -148,3 +148,14 @@ jobs:
         if: matrix.platform == 'macos-latest'
         run: yarn tauri build --target universal-apple-darwin
       #TODO: linux, windows arm64 support
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: client
+          if-no-files-found: error
+          path: | 
+            client/src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
+            client/src-tauri/target/release/bundle/deb/*.msi
+            client/src-tauri/target/release/bundle/appimage/*.AppImage
+            client/src-tauri/target/release/bundle/msi/*.msi
+            
