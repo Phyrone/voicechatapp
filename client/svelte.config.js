@@ -20,8 +20,8 @@ function getAdapter() {
                 pages: "dist",
                 assets: "dist",
                 precompress: !isTauri,
-                fallback: isTauri ? "index.html" : "404.html",
-                //fallback: "index.html",
+                //fallback: isTauri ? "index.html" : "404.html",
+                fallback: "index.html",
             })
         case "cloudflare":
             return cloudflareAdapter()
