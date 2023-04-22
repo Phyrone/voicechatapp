@@ -8,7 +8,7 @@ steps:
     commands:
       - ./gradlew build --no-daemon
   - name: Build Client
-    image: node:19
+    image: node:20
     commands:
       - cd client
       - yarn install
