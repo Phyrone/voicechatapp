@@ -67,12 +67,7 @@ jobs:
           if-no-files-found: error
           path: | 
             client/dist
-      - name: Upload for GitHub Pages
-        uses: actions/upload-pages-artifact@v1
-        if: github.ref == 'refs/heads/main'
-        with:
-          name: client-gh-pages
-          path: dist
+
       
   pages:
     name: Publish to GitHub Pages
@@ -87,6 +82,16 @@ jobs:
       name: client-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: client-web
+          path: dist
+      - name: Upload for GitHub Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          name: client-gh-pages
+          path: dist
       - name: Publish to GitHub Pages
         uses: actions/deploy-pages@v2
         id: deploy
