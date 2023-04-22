@@ -1,0 +1,9 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: Build Server
+    image: azul/zulu-openjdk:11
+    commands:
+      - ./gradlew build --no-daemon
