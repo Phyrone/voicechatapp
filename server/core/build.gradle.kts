@@ -41,6 +41,7 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:2.3.0")
 
 
+    testImplementation(kotlin("test"))
 
 }
 
@@ -76,6 +77,7 @@ spotless {
         //diktat()
     }
 }
+
 tasks {
     withType<DokkaTask>() {
         dependsOn("kaptKotlin")
@@ -98,6 +100,9 @@ tasks {
             into("plugins")
         }
 
+    }
+    test {
+        useJUnitPlatform()
     }
 }
 java.sourceCompatibility = PROJ_JAVA_VERSION

@@ -10,7 +10,7 @@ import de.phyrone.voicechatapp.server.api.Subscribe
 import de.phyrone.voicechatapp.server.api.event.ServerBootstrapEvent
 import de.phyrone.voicechatapp.server.api.event.ServerShutdownEvent
 import de.phyrone.voicechatapp.server.api.logger
-import de.phyrone.voicechatapp.server.core.database.AutoloadTable
+import de.phyrone.voicechatapp.server.core.database.tables.AutoloadTable
 import java.io.Closeable
 import java.sql.Connection
 import javax.sql.DataSource

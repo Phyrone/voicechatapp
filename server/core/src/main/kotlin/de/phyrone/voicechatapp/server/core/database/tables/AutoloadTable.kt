@@ -1,4 +1,4 @@
-package de.phyrone.voicechatapp.server.core.database
+package de.phyrone.voicechatapp.server.core.database.tables
 
 import org.atteo.classindex.IndexAnnotated
 
