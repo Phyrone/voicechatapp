@@ -16,6 +16,8 @@ class TestUIDEncoding {
     val uid = UID(183257676496339456U, "example.com")
     val uidBytes = uid.toBinary()
     assertEquals(
-        "028b0fe2c5ed82006578616d706c652e636f6d", uidBytes.joinToString("") { "%02x".format(it) })
+        "028b0fe2c5ed82006578616d706c652e636f6d",
+        uidBytes.joinToString("") { "%02x".format(it) },
+    )
   }
 }
