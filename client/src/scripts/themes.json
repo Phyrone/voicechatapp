@@ -1,0 +1,122 @@
+[
+  {
+    "displayname": "Default",
+    "id": "default"
+  },
+  {
+    "displayname": "Light",
+    "id": "light"
+  },
+  {
+    "displayname": "Dark",
+    "id": "dark"
+  },
+  {
+    "displayname": "Cupcake",
+    "id": "cupcake"
+  },
+  {
+    "displayname": "Bumblebee",
+    "id": "bumblebee"
+  },
+  {
+    "displayname": "Emerald",
+    "id": "emerald"
+  },
+  {
+    "displayname": "Corporate",
+    "id": "corporate"
+  },
+  {
+    "displayname": "Synthwave",
+    "id": "synthwave"
+  },
+  {
+    "displayname": "Retro",
+    "id": "retro"
+  },
+  {
+    "displayname": "Cyberpunk",
+    "id": "cyberpunk"
+  },
+  {
+    "displayname": "Valentine",
+    "id": "valentine"
+  },
+  {
+    "displayname": "Halloween",
+    "id": "halloween"
+  },
+  {
+    "displayname": "Garden",
+    "id": "garden"
+  },
+  {
+    "displayname": "Forest",
+    "id": "forest"
+  },
+  {
+    "displayname": "Aqua",
+    "id": "aqua"
+  },
+  {
+    "displayname": "Lofi",
+    "id": "lofi"
+  },
+  {
+    "displayname": "Pastel",
+    "id": "pastel"
+  },
+  {
+    "displayname": "Fantasy",
+    "id": "fantasy"
+  },
+  {
+    "displayname": "Wireframe",
+    "id": "wireframe"
+  },
+  {
+    "displayname": "Black",
+    "id": "black"
+  },
+  {
+    "displayname": "Luxury",
+    "id": "luxury"
+  },
+  {
+    "displayname": "Dracula",
+    "id": "dracula"
+  },
+  {
+    "displayname": "CMYK",
+    "id": "cmyk"
+  },
+  {
+    "displayname": "Autumn",
+    "id": "autumn"
+  },
+  {
+    "displayname": "Business",
+    "id": "business"
+  },
+  {
+    "displayname": "Acid",
+    "id": "acid"
+  },
+  {
+    "displayname": "Lemonade",
+    "id": "lemonade"
+  },
+  {
+    "displayname": "Night",
+    "id": "night"
+  },
+  {
+    "displayname": "Coffee",
+    "id": "coffee"
+  },
+  {
+    "displayname": "Winter",
+    "id": "winter"
+  }
+]

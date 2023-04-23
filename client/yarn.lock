@@ -285,6 +285,13 @@
   dependencies:
     "@iconify/types" "*"
 
+"@iconify/icons-material-symbols@^1.2.38":
+  version "1.2.38"
+  resolved "https://registry.yarnpkg.com/@iconify/icons-material-symbols/-/icons-material-symbols-1.2.38.tgz#97ce647bc7563da9260252be2ef87e0cf0128faa"
+  integrity sha512-mIHzvcLzi/9xuBeeMl+4WFVza4VLqvyMOUqoGZdvx3KnhVRpVaEaQhYXZn8qVB7ozBowFrd5MY8bDequA9dxsg==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify/svelte@^3.1.3":
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/@iconify/svelte/-/svelte-3.1.3.tgz#3db356afd8dc17a40d6f9db9e5fef299848bdfd4"
@@ -369,13 +376,6 @@
   version "1.0.0-next.21"
   resolved "https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.21.tgz"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
-
-"@skeletonlabs/skeleton@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@skeletonlabs/skeleton/-/skeleton-1.2.0.tgz#152c8721a903b9c95d31e6a14dee0ac13b6b262a"
-  integrity sha512-WM+vPS3kf2b9bnN4Gr8YpMjRj7Z6gNNgGLeRlmcS50lotpH5oGpbiGh8oxf/j2j0cJeHv2bIwtXkqISuypZs+Q==
-  dependencies:
-    svelte "^3.58.0"
 
 "@sveltejs/adapter-auto@^2.0.0":
   version "2.0.0"
@@ -2181,6 +2181,11 @@ svelte-hmr@^0.15.1:
   resolved "https://registry.npmjs.org/svelte-hmr/-/svelte-hmr-0.15.1.tgz"
   integrity sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==
 
+svelte-local-storage-store@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/svelte-local-storage-store/-/svelte-local-storage-store-0.4.0.tgz#965e342582555b606102045e86662d6c5864e1e6"
+  integrity sha512-ctPykTt4S3BE5bF0mfV0jKiUR1qlmqLvnAkQvYHLeb9wRyO1MdIFDVI23X+TZEFleATHkTaOpYZswIvf3b2tWA==
+
 svelte-preprocess@^5.0.3:
   version "5.0.3"
   resolved "https://registry.npmjs.org/svelte-preprocess/-/svelte-preprocess-5.0.3.tgz"
@@ -2192,7 +2197,7 @@ svelte-preprocess@^5.0.3:
     sorcery "^0.11.0"
     strip-indent "^3.0.0"
 
-svelte@^3.54.0, svelte@^3.58.0:
+svelte@^3.54.0:
   version "3.58.0"
   resolved "https://registry.npmjs.org/svelte/-/svelte-3.58.0.tgz"
   integrity sha512-brIBNNB76mXFmU/Kerm4wFnkskBbluBDCjx/8TcpYRb298Yh2dztS2kQ6bhtjMcvUhd5ynClfwpz5h2gnzdQ1A==

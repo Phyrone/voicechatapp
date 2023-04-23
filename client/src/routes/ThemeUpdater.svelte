@@ -1,6 +1,6 @@
 <script lang="ts">
-    import {selected_theme_id} from "../scripts/selected_theme_id";
+    import {theme_settings} from "../scripts/theme_settings";
 
-    $: window.document.body.dataset.theme = $selected_theme_id;
+    $: window.document.body.dataset.theme = $theme_settings;
 </script>
-<svelte:body data-theme={$selected_theme_id}></svelte:body>
+<svelte:body data-theme={$theme_settings}></svelte:body>

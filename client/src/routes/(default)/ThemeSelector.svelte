@@ -1,11 +1,11 @@
 <script lang="ts">
-    import type {Theme} from "../../scripts/selected_theme_id";
-    import {selected_theme_id, themes} from "../../scripts/selected_theme_id";
+    import type {Theme} from "../../scripts/theme_settings";
+    import {theme_settings, themes} from "../../scripts/theme_settings";
 
 </script>
 
-<select class:select={true} bind:value={$selected_theme_id}>
+<select class:select={true} bind:value={$theme_settings}>
     {#each themes as theme}
-        <option value={theme.id}>{theme.name}</option>
+        <option value={theme.id}>{theme.displayname}</option>
     {/each}
 </select>
