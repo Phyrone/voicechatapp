@@ -1,8 +1,8 @@
 @startuml
-rectangle Servers{
-(Server 1) <-> (Server 2)
-(Server 1) <--> (Server 3)
-(Server 2) <--> (Server 3)
+rectangle "Federated Servers"{
+  (Server 1) <.> (Server 2)
+  (Server 1) <--> (Server 3)
+  (Server 2) <..> (Server 3)
 }
 
 rectangle Clients{
@@ -10,7 +10,5 @@ rectangle Clients{
   (Server 1) <--- (Client 2)
   (Server 3) <--- (Client 3)
 }
-
-
 
 @enduml

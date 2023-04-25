@@ -112,10 +112,10 @@ class ServerBootstrap(
               .nanoseconds
       val operatingSystemInfo = koin.get<OperatingSystem>()
 
-      val asciArtwork: String
+      val asciiArtwork: String
 
       try {
-        asciArtwork = FigletFont.convertOneLine(CommonConst.NAME)
+        asciiArtwork = FigletFont.convertOneLine(CommonConst.NAME)
       } catch (e: Exception) {
         LOGGER.atSevere().withCause(e).log("Error while loading ASCII Artwork")
         throw e
@@ -132,7 +132,7 @@ class ServerBootstrap(
               bootstrapTime,
               rtBean.uptime.milliseconds,
               /* ASCII */
-              asciArtwork,
+              asciiArtwork,
               /* Version */
               BuildInfo.VERSION,
               /* Build */
