@@ -2,5 +2,9 @@
 export default {
     content: ['./src/**/*.{html,js,svelte,ts}',], theme: {
         extend: {},
-    }, plugins: [require("daisyui"),],
+    }, plugins: [
+        require("daisyui"),
+        require("tailwind-scrollbar"),
+        require('@tailwindcss/typography')
+    ],
 }

@@ -2,9 +2,9 @@
 
     let num = 0;
 
-    let array: null[] = [];
+    let array: number[] = [];
     $: {
-        array = new Array(num).fill(null)
+        array = new Array(num).fill(0);
     }
 </script>
 

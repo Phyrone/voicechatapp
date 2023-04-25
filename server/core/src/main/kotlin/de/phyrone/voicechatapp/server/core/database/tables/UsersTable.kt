@@ -1,5 +1,5 @@
 package de.phyrone.voicechatapp.server.core.database.tables
 
-import de.phyrone.voipsys.server.database.types.UIDTable
+import de.phyrone.voicechatapp.server.core.database.types.UIDTable
 
-@AutoloadTable class UsersTable : UIDTable("user")
+@AutoloadTable object UsersTable : UIDTable("user")

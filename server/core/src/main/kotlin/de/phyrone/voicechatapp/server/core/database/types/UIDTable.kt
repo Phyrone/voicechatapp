@@ -1,7 +1,6 @@
-package de.phyrone.voipsys.server.database.types
+package de.phyrone.voicechatapp.server.core.database.types
 
 import de.phyrone.voicechatapp.server.core.database.UID
-import de.phyrone.voicechatapp.server.core.database.types.uid
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IdTable
 import org.jetbrains.exposed.sql.Column

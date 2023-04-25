@@ -18,7 +18,9 @@ repositories {
     maven("https://repo.phyrone.de/repository/maven/")
 }
 dependencies {
-    compileOnly(project(":server:api"))
+
+    implementation("io.ktor:ktor-server-default-headers-jvm:2.3.0")
+  compileOnly(project(":server:api"))
 
     //classindex
     implementation("org.atteo.classindex:classindex:3.13")
@@ -39,6 +41,8 @@ dependencies {
     //ktor
     implementation("io.ktor:ktor-server-core:2.3.0")
     implementation("io.ktor:ktor-server-netty:2.3.0")
+    implementation("io.ktor:ktor-server-cors-jvm:2.3.0")
+    implementation("io.ktor:ktor-server-websockets:2.3.0")
 
 
     testImplementation(kotlin("test"))

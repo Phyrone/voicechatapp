@@ -1,15 +1,15 @@
-package de.phyrone.voicechatapp.server.core
+package de.phyrone.voicechatapp.server.core.database
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import de.phyrone.voicechatapp.server.api.AutoloadListener
 import de.phyrone.voicechatapp.server.api.Autoloader
 import de.phyrone.voicechatapp.server.api.ObjectWaiter
-import de.phyrone.voicechatapp.server.api.Prefetch
+import de.phyrone.voicechatapp.server.api.ServerModule
 import de.phyrone.voicechatapp.server.api.Subscribe
 import de.phyrone.voicechatapp.server.api.event.ServerBootstrapEvent
 import de.phyrone.voicechatapp.server.api.event.ServerShutdownEvent
 import de.phyrone.voicechatapp.server.api.logger
+import de.phyrone.voicechatapp.server.core.CoreSqlLogger
 import de.phyrone.voicechatapp.server.core.database.tables.AutoloadTable
 import java.io.Closeable
 import java.sql.Connection
@@ -23,14 +23,11 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.koin.core.KoinApplication
-import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-@Prefetch
-@AutoloadListener
-class DatabaseManager : KoinComponent {
+class DatabaseManager : ServerModule {
 
   private val koinApplication by inject<KoinApplication>()
   private val dataSource by inject<DataSource>()

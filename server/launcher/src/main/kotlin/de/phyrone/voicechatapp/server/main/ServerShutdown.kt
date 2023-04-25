@@ -25,7 +25,7 @@ class ServerShutdown(private val koin: Koin) : KoinComponent {
 
   private fun shutdown() = runBlocking {
     LOGGER.atInfo().log("Shutting down...")
-    val shutdownTime = measureNanoTime { eventBus.post(ServerShutdownEvent()) }.nanoseconds
+    val shutdownTime = measureNanoTime { eventBus.post(ServerShutdownEvent(), true) }.nanoseconds
     LOGGER.atInfo().log("Shutdown done! (%s)", shutdownTime)
   }
 

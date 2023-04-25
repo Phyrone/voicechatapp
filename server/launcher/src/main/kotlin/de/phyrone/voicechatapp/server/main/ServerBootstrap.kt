@@ -6,10 +6,9 @@ import de.phyrone.voicechatapp.CommonConst
 import de.phyrone.voicechatapp.server.DefaultAutoloader
 import de.phyrone.voicechatapp.server.KoinApplicationLogger
 import de.phyrone.voicechatapp.server.KoinFileSelector
-import de.phyrone.voicechatapp.server.api.AutoloadListener
 import de.phyrone.voicechatapp.server.api.Autoloader
 import de.phyrone.voicechatapp.server.api.EventBus
-import de.phyrone.voicechatapp.server.api.Prefetch
+import de.phyrone.voicechatapp.server.api.ServerModule
 import de.phyrone.voicechatapp.server.api.event.ServerBootstrapEvent
 import de.phyrone.voicechatapp.server.api.formatFancy
 import de.phyrone.voicechatapp.server.api.logger
@@ -26,14 +25,17 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.nanoseconds
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import org.atteo.classindex.ClassIndex
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
+import org.koin.core.qualifier.TypeQualifier
 import org.koin.core.qualifier.named
 import org.koin.dsl.bind
+import org.koin.dsl.binds
 import org.koin.dsl.module
 import oshi.SystemInfo
 import oshi.hardware.HardwareAbstractionLayer
@@ -93,10 +95,14 @@ class ServerBootstrap(
                   koin = koinApplication.koin
                   koin.get<ServerShutdown>().register()
                   koin.get<PluginLoader>().loadPlugins(/* TODO add configurable folder */ )
-                  prefetchInstances(koin.get())
-                  val eventBus = koin.get<EventBus>()
+                  val registerJOB = launch { registerModules(koin.get(), koin.get(), koin.get()) }
+                  val eventBusFuture = async { koin.get<EventBus>() }
+                  registerJOB.join()
+                  val eventBus = eventBusFuture.await()
                   registerListeners(koin.get(), eventBus)
-                  withContext(Dispatchers.Default) { eventBus.post(ServerBootstrapEvent(), false) }
+
+                  eventBus.post(ServerBootstrapEvent(), false)
+
                   rtBean = koin.get<RuntimeMXBean>()
                 } catch (e: Throwable) {
                   LOGGER.atSevere().withCause(e).log("Error while bootstrapping")
@@ -148,19 +154,41 @@ class ServerBootstrap(
     LOGGER.atFine().log("Bootstrap Enqueued to Mainloop")
   }
 
-  private suspend fun prefetchInstances(
-      autoloader: DefaultAutoloader,
-  ) = coroutineScope {
-    LOGGER.atInfo().log("Prefetching...")
-    val earlyIndexTime = measureNanoTime { autoloader.getAnnotated(Prefetch::class) }.nanoseconds
-    LOGGER.atFine().log("Prefetch done (%s)", earlyIndexTime)
+  private fun registerModules(
+      classloader: JarClassloader,
+      instancer: DefaultSingletonInstancer,
+      koin: Koin,
+  ) {
+    val serverModuleClasses: List<Class<*>>
+
+    val indexTime =
+        measureNanoTime {
+              serverModuleClasses =
+                  ClassIndex.getSubclasses(ServerModule::class.java, classloader).toList()
+            }
+            .nanoseconds
+    LOGGER.atInfo().log("Found %d Modules (%s)", serverModuleClasses.size, indexTime)
+
+    koin.loadModules(
+        listOf(
+            module(true) {
+              for (serverModuleClass in serverModuleClasses) {
+                single(TypeQualifier(serverModuleClass.kotlin)) {
+                  instancer[serverModuleClass]
+                } binds
+                    arrayOf(
+                        serverModuleClass.kotlin,
+                        ServerModule::class,
+                    )
+              }
+            },
+        ),
+    )
   }
 
-  private suspend fun registerListeners(autoloader: Autoloader, eventBus: EventBus) {
+  private suspend fun registerListeners(koin: Koin, eventBus: EventBus) {
     coroutineScope {
-      autoloader.getAnnotated(AutoloadListener::class).forEach { listener ->
-        eventBus.register(listener)
-      }
+      koin.getAll<ServerModule>().forEach { listener -> eventBus.register(listener) }
     }
   }
 

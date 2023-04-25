@@ -59,6 +59,7 @@ fun logger(name: String): FluentLogger {
     val backend = Platform.getBackend(name)
     return fluentLoggerConstructor.newInstance(backend)
 }
+
 /*
 class SharableMutex {
 

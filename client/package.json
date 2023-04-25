@@ -11,7 +11,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"format": "prettier --plugin-search-dir . --write .",
+		"sync": "svelte-kit sync"
 	},
 	"dependencies": {
 		"@iconify/icons-line-md": "^1.2.22",
@@ -28,6 +29,7 @@
 		"@sveltejs/adapter-cloudflare": "^2.2.0",
 		"@sveltejs/adapter-static": "^2.0.2",
 		"@sveltejs/kit": "^1.5.0",
+		"@tailwindcss/typography": "^0.5.9",
 		"@tauri-apps/cli": "^1.2.3",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
@@ -40,6 +42,7 @@
 		"prettier-plugin-svelte": "^2.8.1",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
+		"tailwind-scrollbar": "^3.0.0",
 		"tailwindcss": "^3.3.1",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
