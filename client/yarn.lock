@@ -181,9 +181,9 @@
     "@iconify/types" "*"
 
 "@iconify/icons-material-symbols@^1.2.38":
-  version "1.2.38"
-  resolved "https://registry.yarnpkg.com/@iconify/icons-material-symbols/-/icons-material-symbols-1.2.38.tgz#97ce647bc7563da9260252be2ef87e0cf0128faa"
-  integrity sha512-mIHzvcLzi/9xuBeeMl+4WFVza4VLqvyMOUqoGZdvx3KnhVRpVaEaQhYXZn8qVB7ozBowFrd5MY8bDequA9dxsg==
+  version "1.2.39"
+  resolved "https://registry.yarnpkg.com/@iconify/icons-material-symbols/-/icons-material-symbols-1.2.39.tgz#d3904423384cb56c9a64319bc523b83bb315c7bc"
+  integrity sha512-GWs/ZNwwuw04Fa30DHhNQ/gC1O2hHRGsMYOLeqIjs+7NpObpf5ugwCr0LhM3zJafNxLR4Nieh5wUJl5NKt+8vg==
   dependencies:
     "@iconify/types" "*"
 
