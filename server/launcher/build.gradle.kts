@@ -62,7 +62,7 @@ dependencies {
     implementation("com.github.lalyos:jfiglet:0.0.9")
 
     //oshi
-    implementation("com.github.oshi:oshi-core:6.4.1")
+    implementation("com.github.oshi:oshi-core:6.4.2")
 
 }
 
