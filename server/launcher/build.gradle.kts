@@ -20,7 +20,7 @@ dependencies {
     implementation(kotlin("reflect"))
 
     //kotlin coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-RC")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.0-RC")
 
     //koin
