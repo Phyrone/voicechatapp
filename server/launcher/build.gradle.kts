@@ -21,7 +21,7 @@ dependencies {
 
     //kotlin coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.0-RC")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.0")
 
     //koin
     implementation("io.insert-koin:koin-core:3.4.0")
