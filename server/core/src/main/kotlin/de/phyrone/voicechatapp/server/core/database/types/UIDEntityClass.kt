@@ -6,7 +6,7 @@ import org.jetbrains.exposed.dao.EntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IdTable
 
-open class UidEntityClass<out T : Entity<UID>>(
+open class UIDEntityClass<out T : Entity<UID>>(
     table: IdTable<UID>,
     entityType: Class<T>? = null,
     entityCtor: ((EntityID<UID>) -> T)? = null,

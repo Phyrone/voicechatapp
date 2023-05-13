@@ -9,4 +9,4 @@ import org.koin.core.component.KoinComponent
  *
  * @see IndexSubclasses
  */
-@IndexSubclasses interface ServerModule : KoinComponent
+interface ServerModule : KoinComponent

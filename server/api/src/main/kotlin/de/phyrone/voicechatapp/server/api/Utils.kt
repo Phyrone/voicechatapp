@@ -35,7 +35,6 @@ fun Instant.formatFancy(): String {
         TimeZone.getTimeZone(zoneId).getDisplayName(true, TimeZone.LONG, Locale.getDefault())
     val dateToFormat = LocalDateTime.ofInstant(this, zoneId)
     val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")
-
     return String.format("%s [%s]", formatter.format(dateToFormat), timeZone)
 }
 

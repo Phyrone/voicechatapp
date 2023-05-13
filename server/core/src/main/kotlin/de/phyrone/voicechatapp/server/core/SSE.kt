@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 data class SseEvent(val data: String, val event: String? = null, val id: String? = null)
 
-fun Writer.sendSSE(event: SseEvent) {
+private fun Writer.sendSSE(event: SseEvent) {
   if (event.id != null) {
     write("id: ${event.id}\n")
   }

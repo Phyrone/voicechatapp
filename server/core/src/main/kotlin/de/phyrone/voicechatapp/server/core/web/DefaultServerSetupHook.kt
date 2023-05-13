@@ -55,7 +55,7 @@ class DefaultServerSetupHook : ServerModule {
       install(DefaultHeaders) {
         BuildInfo.VERSION
         header(HttpHeaders.Server, "${CommonConst.NAME}/${BuildInfo.VERSION}")
-        header("X-Engine", "Ktor") // will send this header with each response
+        header("X-Engine", "Ktor")
       }
 
       install(Compression) {

@@ -6,6 +6,7 @@ import de.phyrone.voicechatapp.CommonConst
 import de.phyrone.voicechatapp.server.DefaultAutoloader
 import de.phyrone.voicechatapp.server.KoinApplicationLogger
 import de.phyrone.voicechatapp.server.KoinFileSelector
+import de.phyrone.voicechatapp.server.api.AutoloadSubscriber
 import de.phyrone.voicechatapp.server.api.Autoloader
 import de.phyrone.voicechatapp.server.api.EventBus
 import de.phyrone.voicechatapp.server.api.ServerModule
@@ -99,7 +100,7 @@ class ServerBootstrap(
                   val eventBusFuture = async { koin.get<EventBus>() }
                   registerJOB.join()
                   val eventBus = eventBusFuture.await()
-                  registerListeners(koin.get(), eventBus)
+                  registerListeners(koin.get(), koin.get(), eventBus)
 
                   eventBus.post(ServerBootstrapEvent(), false)
 
@@ -186,9 +187,15 @@ class ServerBootstrap(
     )
   }
 
-  private suspend fun registerListeners(koin: Koin, eventBus: EventBus) {
+  private suspend fun registerListeners(koin: Koin, autoloader: Autoloader, eventBus: EventBus) {
     coroutineScope {
-      koin.getAll<ServerModule>().forEach { listener -> eventBus.register(listener) }
+      (koin.getAll<ServerModule>() + autoloader.getAnnotated(AutoloadSubscriber::class.java))
+          .distinct()
+          .forEach { listener ->
+            eventBus.register(
+                listener,
+            )
+          }
     }
   }
 

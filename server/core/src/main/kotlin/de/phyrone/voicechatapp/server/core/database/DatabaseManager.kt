@@ -36,7 +36,7 @@ class DatabaseManager : ServerModule {
 
   @Subscribe(async = true)
   suspend fun ServerBootstrapEvent.onBootstrap() {
-    LOGGER.atInfo().log("Loading Database Module...")
+    logger.atInfo().log("Migrating Database if needed...")
     val databaseModuleLoad =
         measureNanoTime {
               koinApplication.modules(DATABASE_MODULE)
@@ -45,25 +45,34 @@ class DatabaseManager : ServerModule {
                   database,
                   Connection.TRANSACTION_SERIALIZABLE,
               ) {
-                SchemaUtils.createMissingTablesAndColumns(
-                    *autoloader.getAnnotated(AutoloadTable::class, Table::class).toTypedArray(),
-                )
+                migrateDatabase()
               }
             }
             .nanoseconds
-    LOGGER.atInfo().log("Database Loaded (%s)", databaseModuleLoad)
+    logger.atInfo().log("Migration Done! (%s)", databaseModuleLoad)
     ObjectWaiter(this)
+  }
+
+  private suspend fun migrateDatabase() {
+    // migration scripts here
+
+    val tables =
+        SchemaUtils.sortTablesByReferences(
+                autoloader.getAnnotated(AutoloadTable::class, Table::class),
+            )
+            .toTypedArray()
+    SchemaUtils.createMissingTablesAndColumns(*tables, withLogs = true, inBatch = false)
   }
 
   @Subscribe
   fun ServerShutdownEvent.onShutdown() {
-    LOGGER.atInfo().log("Disabling Database Module...")
+    logger.atInfo().log("Disabling Database Module...")
     val disableTime = measureNanoTime { (dataSource as? Closeable)?.close() }.nanoseconds
-    LOGGER.atInfo().log("Database Module Disabled (%s)", disableTime)
+    logger.atInfo().log("Database Module Disabled (%s)", disableTime)
   }
 
   companion object {
-    private val LOGGER = logger()
+    private val logger = logger()
     private val DATABASE_MODULE =
         module(true) {
           single { databaseConfig() }
@@ -82,7 +91,7 @@ class DatabaseManager : ServerModule {
     private fun datasourceConfig(): HikariConfig {
       // TODO configurable
       val config = HikariConfig()
-      config.jdbcUrl = "jdbc:h2:./data/database"
+      config.jdbcUrl = "jdbc:h2:./data/database;auto_server=true"
       config.driverClassName = "org.h2.Driver"
       config.maximumPoolSize = 15
       config.minimumIdle = 1

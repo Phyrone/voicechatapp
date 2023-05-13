@@ -10,12 +10,12 @@ import org.atteo.classindex.ClassIndex
 import org.koin.core.component.KoinComponent
 
 class DefaultAutoloader(
-    val instancer: DefaultSingletonInstancer,
-    val classloader: ClassLoader,
+    private val instancer: DefaultSingletonInstancer,
+    private val classloader: ClassLoader,
 ) : Autoloader, KoinComponent {
 
   private suspend fun Iterable<Class<*>>.instanceAll(): List<Any> = coroutineScope {
-    map { async { instancer.get(it) } }.awaitAll().filterNotNull()
+    map { async { instancer[it] } }.awaitAll().filterNotNull()
   }
 
   private fun <T> List<Any>.typed(clazz: Class<T>): List<T> = filterIsInstance(clazz)

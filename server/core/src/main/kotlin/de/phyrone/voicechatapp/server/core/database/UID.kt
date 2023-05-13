@@ -6,7 +6,8 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 data class UID(
-    val snowflake: ULong,
+    val snowflake:
+        Long, // negative values are reserved for system f.e. system messages or something
     val host: String,
 ) : Comparable<UID>, Serializable {
 
@@ -47,13 +48,11 @@ data class UID(
 
     const val UID_STRING_SEPERATOR = ':'
 
-    operator fun invoke(snowflake: Long, host: String): UID = UID(snowflake.toULong(), host)
-
     fun fromUIDString(uidString: String): UID {
       require(uidString.length <= UID_STRING_MAX_LENGTH) { "UID String is too long" }
       require(uidString.contains('@')) { "UID String is invalid" }
       val (snowflakeString, hostname) = uidString.split(UID_STRING_SEPERATOR, limit = 2)
-      val snowflake = snowflakeString.toULongOrNull() ?: error("UID String is invalid")
+      val snowflake = snowflakeString.toLongOrNull() ?: error("UID String is invalid")
       return UID(snowflake, hostname)
     }
 
@@ -62,7 +61,7 @@ data class UID(
       require(binary.size <= UID_BINARY_MAX_LENGTH) { "Binary representation of UID is too long" }
       val buffer = ByteBuffer.wrap(binary)
       buffer.order(ByteOrder.BIG_ENDIAN)
-      val snowflake = buffer.long.toULong()
+      val snowflake = buffer.long
       val hostnameBytes = ByteArray(buffer.remaining())
       buffer.get(hostnameBytes)
       val hostname = hostnameBytes.toString(Charsets.UTF_8)

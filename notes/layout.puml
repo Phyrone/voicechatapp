@@ -1,0 +1,14 @@
+@startsalt
+{
+    {
+        [Back] | Channel name etc. | [Call] | [B]
+        A B C
+       {SI
+       A
+       B
+       C
+       }
+
+    }
+}
+@endsalt
