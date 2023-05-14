@@ -1,4 +1,7 @@
-import de.phyrone.buildscripts.PROJ_KOTLIN_JVM_TARGET
+import de.phyrone.buildscripts.PROJ_CLIENT_ANDROID_COMPILE_SDK
+import de.phyrone.buildscripts.PROJ_CLIENT_JAVA_VERSION
+import de.phyrone.buildscripts.PROJ_COMMON_KOTLIN_JVM_TARGET
+import de.phyrone.buildscripts.PROJ_COMMON_KOTLIN_JVM_TARGET_STRING
 import de.phyrone.buildscripts.WRITE_YOURSELF_TASK_GROUP
 import de.phyrone.buildscripts.const.ConstWriteYourself
 import org.jetbrains.dokka.gradle.DokkaTask
@@ -13,18 +16,13 @@ plugins {
 val writeYourselfDIR = buildDir.resolve("write-yourself")
 
 kotlin {
-    jvm(){
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = PROJ_KOTLIN_JVM_TARGET.toString()
-            }
-        }
-    }
-    /*
+    jvmToolchain(PROJ_COMMON_KOTLIN_JVM_TARGET)
+    jvm()
     js(IR) {
         browser()
         binaries.library()
-    }*/
+    }
+
     sourceSets {
         @Suppress("UNUSED_VARIABLE")
         val commonMain by getting {
@@ -35,13 +33,12 @@ kotlin {
     }
 }
 
-
 tasks {
 
     val buildInfoTask = create("writeBuildInfo") {
         val buildTime =Instant.now()
         val buildInfoProps = mapOf(
-            "version" to version,
+            "version" to version.toString(),
             "build_timestamp" to buildTime.toString(),
             "build_timestamp_millis" to buildTime.toEpochMilli(),
         ) + ConstWriteYourself.getGitInfo(rootProject.projectDir)

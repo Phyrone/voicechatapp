@@ -1,3 +1,4 @@
+import de.phyrone.buildscripts.SemanticVersion
 import org.jetbrains.dokka.gradle.DokkaCollectorTask
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
@@ -7,8 +8,9 @@ import org.jetbrains.kotlin.gradle.internal.KaptTask
 plugins {
     //kotlin plugins
     kotlin("jvm") version "1.8.21" apply false
-    kotlin(("kapt")) version "1.8.20" apply false
+    kotlin(("kapt")) version "1.8.21" apply false
     kotlin("multiplatform") version "1.8.21" apply false
+    kotlin("android") version "1.8.21" apply false
 
     //versions plugin
     id("com.github.ben-manes.versions") version "0.46.0"
@@ -21,20 +23,29 @@ plugins {
 
     //dokka
     id("org.jetbrains.dokka") version "1.8.10"
+
+    //android
+    id("com.android.application") version "7.4.1" apply false
+    id("com.android.library") version "7.4.1" apply false
+
+    id("org.jetbrains.compose") version "1.4.0" apply false
 }
 
 
-
+val projectVersion = SemanticVersion(1, 0, 0, SemanticVersion.PreReleaseType.DEV)
 allprojects {
     apply(plugin = "idea")
     //apply(plugin = "org.jetbrains.dokka")
 
 
     group = "de.phyrone"
-    version = "0.0.1-SNAPSHOT"
+    version = projectVersion
 
     repositories {
         mavenCentral()
+        google()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://jitpack.io")
     }
 }
 

@@ -1,5 +1,5 @@
-import de.phyrone.buildscripts.PROJ_JAVA_VERSION
-import de.phyrone.buildscripts.PROJ_KOTLIN_JVM_TARGET
+import de.phyrone.buildscripts.PROJ_SERVER_JAVA_VERSION
+import de.phyrone.buildscripts.PROJ_SERVER_KOTLIN_JVM_TARGET
 
 /*
 import de.phyrone.buildscripts.jarFiles
@@ -117,7 +117,7 @@ tasks {
         }
     }
     compileKotlin {
-        kotlinOptions.jvmTarget = PROJ_KOTLIN_JVM_TARGET.toString()
+        kotlinOptions.jvmTarget = PROJ_SERVER_KOTLIN_JVM_TARGET.toString()
     }
 
     /*
@@ -204,10 +204,10 @@ tasks {
 
 
 }
-java.sourceCompatibility = PROJ_JAVA_VERSION
-java.targetCompatibility = PROJ_JAVA_VERSION
+java.sourceCompatibility = PROJ_SERVER_JAVA_VERSION
+java.targetCompatibility = PROJ_SERVER_JAVA_VERSION
 kotlin {
-    jvmToolchain(PROJ_KOTLIN_JVM_TARGET)
+    jvmToolchain(PROJ_SERVER_KOTLIN_JVM_TARGET)
 }
 
 /*
